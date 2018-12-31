@@ -1,0 +1,2 @@
+# WordSearchKata
+Word Search Kata
