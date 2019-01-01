@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearch", "WordSearch\WordSearch.csproj", "{0A414570-486B-48F9-AEAE-AA228D80ED91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearchTest", "WordSearchTest\WordSearchTest.csproj", "{6C9A58C8-94B7-4A06-B549-CDAB8CC85CEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A414570-486B-48F9-AEAE-AA228D80ED91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A414570-486B-48F9-AEAE-AA228D80ED91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A414570-486B-48F9-AEAE-AA228D80ED91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A414570-486B-48F9-AEAE-AA228D80ED91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C9A58C8-94B7-4A06-B549-CDAB8CC85CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C9A58C8-94B7-4A06-B549-CDAB8CC85CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C9A58C8-94B7-4A06-B549-CDAB8CC85CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C9A58C8-94B7-4A06-B549-CDAB8CC85CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
