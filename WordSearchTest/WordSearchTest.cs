@@ -24,6 +24,34 @@ namespace WordSearchTest
             Assert.Equal(expectedResults, actualResults);
         }
         
+        [Theory]
+        [InlineData(1)]
+        public void WordSearch_Finds_Word_in_up_direction(int testCase)
+        {
+            WordSearch.WordSearch downwardsFinder = new WordSearch.WordSearch();
+
+            string downWord = "BONES";
+
+            List<List<char>> gridArrayList = GetGridList(testCase);
+
+            string expectedResults = GetExpecteUpWorddResults(testCase);
+            string actualResults = downwardsFinder.FindWord(downWord, gridArrayList);
+
+            Assert.Equal(expectedResults, actualResults);
+        }
+        
+        
+        
+        private string GetExpecteUpWorddResults(int testCase)
+        {
+            if (1 == testCase)
+            {
+                return "(3,4),(3,3),(3,2),(3,1),(3,0)";
+            }
+            
+            return "";
+        }
+        
         
         private string GetExpectedResults(int testCase)
         {
@@ -87,6 +115,7 @@ namespace WordSearchTest
                     new List<char> {'M', 'Q', 'E', 'O', 'R', 'H', 'K', 'T', 'P', 'Y', 'E', 'M', 'Y', 'V', 'I'}
                 };
             }
+            
 
             return new List<List<char>>();
 
