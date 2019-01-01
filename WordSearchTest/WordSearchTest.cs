@@ -12,14 +12,14 @@ namespace WordSearchTest
         [InlineData(2)]
         public void WordSearch_Finds_Word_in_down_direction(int testCase)
         {
-            WordSearch.WordSearch downwardsFinder = new WordSearch.WordSearch();
+            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
 
-            string downWord = "KIRK";
+            string searchWord = "KIRK";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
             string expectedResults = GetExpectedResults(testCase);
-            string actualResults = downwardsFinder.FindWord(downWord, gridArrayList);
+            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -29,14 +29,14 @@ namespace WordSearchTest
         [InlineData(3)]
         public void WordSearch_Finds_Word_in_up_direction(int testCase)
         {
-            WordSearch.WordSearch downwardsFinder = new WordSearch.WordSearch();
+            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
 
-            string downWord = "BONES";
+            string searchWord = "BONES";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
             string expectedResults = GetExpecteUpWorddResults(testCase);
-            string actualResults = downwardsFinder.FindWord(downWord, gridArrayList);
+            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -47,14 +47,14 @@ namespace WordSearchTest
         [InlineData(4)]
         public void WordSearch_Finds_Word_in_left_to_right_direction(int testCase)
         {
-            WordSearch.WordSearch downwardsFinder = new WordSearch.WordSearch();
+            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
 
-            string downWord = "UHURA";
+            string searchWord = "UHURA";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
             string expectedResults = GetExpecteLtRWorddResults(testCase);
-            string actualResults = downwardsFinder.FindWord(downWord, gridArrayList);
+            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -62,16 +62,17 @@ namespace WordSearchTest
         
         [Theory]
         [InlineData(1)]
+        [InlineData(5)]
         public void WordSearch_Finds_Word_in_right_to_left_direction(int testCase)
         {
-            WordSearch.WordSearch downwardsFinder = new WordSearch.WordSearch();
+            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
 
-            string downWord = "ZECTTE";
+            string searchWord = "ZECTTE";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
             string expectedResults = GetExpecteRtLWorddResults(testCase);
-            string actualResults = downwardsFinder.FindWord(downWord, gridArrayList);
+            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -125,6 +126,11 @@ namespace WordSearchTest
             if (1 == testCase )
             {
                 return "(7,14),(6,14),(5,14),(4,14),(3,14),(2,14)";
+            }
+            
+            if (5 == testCase )
+            {
+                return "(14,9),(13,9),(12,9),(11,9),(10,9),(9,9)";
             }
 
             return "";
@@ -222,6 +228,29 @@ namespace WordSearchTest
                     new List<char> {'W', 'M', 'S', 'F', 'N', 'W', 'S', 'S', 'P', 'V', 'J', 'U', 'I', 'I', 'I'},
                     new List<char> {'C', 'V', 'Z', 'C', 'Z', 'B', 'Y', 'O', 'X', 'K', 'L', 'W', 'E', 'Z', 'O'},
                     new List<char> {'K', 'T', 'E', 'T', 'T', 'C', 'E', 'Z', 'V', 'U', 'D', 'O', 'N', 'K', 'A'}
+                };
+            }
+            
+            
+            if (5 == testCase)
+            {
+                return new List<List<char>>
+                {
+                    new List<char> {'U', 'N', 'K', 'S', 'G', 'K', 'M', 'A', 'R', 'N', 'H', 'K', 'D', 'T', 'A'},
+                    new List<char> {'W', 'T', 'F', 'E', 'C', 'Q', 'M', 'W', 'Q', 'J', 'C', 'I', 'H', 'S', 'N'},
+                    new List<char> {'V', 'V', 'Q', 'N', 'K', 'M', 'Y', 'C', 'Y', 'O', 'W', 'R', 'J', 'W', 'N'},
+                    new List<char> {'M', 'Q', 'E', 'O', 'R', 'H', 'B', 'T', 'P', 'Y', 'E', 'K', 'Y', 'V', 'I'},
+                    new List<char> {'J', 'W', 'V', 'B', 'B', 'Y', 'A', 'S', 'T', 'Y', 'O', 'M', 'L', 'O', 'N'},
+                    new List<char> {'J', 'R', 'L', 'M', 'C', 'U', 'C', 'N', 'O', 'O', 'W', 'U', 'U', 'W', 'X'},
+                    new List<char> {'X', 'O', 'E', 'N', 'X', 'M', 'Y', 'S', 'V', 'I', 'C', 'S', 'R', 'Q', 'L'},
+                    new List<char> {'K', 'Z', 'R', 'P', 'H', 'N', 'T', 'P', 'W', 'H', 'D', 'S', 'R', 'F', 'R'},
+                    new List<char> {'Y', 'K', 'L', 'W', 'Z', 'T', 'M', 'Q', 'H', 'U', 'H', 'U', 'R', 'A', 'K'},
+                    new List<char> {'D', 'D', 'O', 'I', 'H', 'H', 'N', 'P', 'M', 'E', 'T', 'T', 'C', 'E', 'Z'},
+                    new List<char> {'Y', 'X', 'X', 'I', 'V', 'K', 'E', 'G', 'A', 'G', 'J', 'P', 'M', 'P', 'R'},
+                    new List<char> {'A', 'K', 'M', 'L', 'V', 'Y', 'E', 'I', 'J', 'C', 'U', 'S', 'S', 'T', 'N'},
+                    new List<char> {'W', 'M', 'S', 'F', 'N', 'W', 'S', 'S', 'P', 'V', 'J', 'U', 'I', 'I', 'I'},
+                    new List<char> {'C', 'V', 'Z', 'C', 'Z', 'B', 'Y', 'O', 'X', 'K', 'L', 'W', 'E', 'Z', 'O'},
+                    new List<char> {'K', 'T', 'E', 'R', 'T', 'C', 'E', 'Z', 'V', 'U', 'D', 'O', 'N', 'K', 'A'}
                 };
             }
 

@@ -11,10 +11,10 @@ namespace WordSearch
             
         }
 
-        public string FindWord(string downWord, List<List<char>> gridArrayList)
+        public string FindWord(string searchWord, List<List<char>> gridArrayList)
         {
             //lift this out because linq pukes
-            char firstchar = downWord[0];
+            char firstchar = searchWord[0];
             
             for (int rowCountYPos = 0; rowCountYPos < gridArrayList.Count; rowCountYPos++)
             {
@@ -23,31 +23,31 @@ namespace WordSearch
                 for(int currentMatch = 0; currentMatch <  matchCount; currentMatch++)
                 {
                     currentMatchIndexXpos = gridArrayList[rowCountYPos].IndexOf(firstchar, currentMatchIndexXpos);
-                    string testWord = GetWordDown(currentMatchIndexXpos, rowCountYPos, downWord.Length, gridArrayList);
-                    if (downWord.Equals(testWord))
+                    string testWord = GetWordDown(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    if (searchWord.Equals(testWord))
                     {
-                        return GetWordDownCoordinateString(currentMatchIndexXpos, rowCountYPos, downWord.Length);
+                        return GetWordDownCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
                     
-                    testWord = GetWordUp(currentMatchIndexXpos, rowCountYPos, downWord.Length, gridArrayList);
-                    if (downWord.Equals(testWord))
+                    testWord = GetWordUp(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    if (searchWord.Equals(testWord))
                     {
-                        return GetWordUpCoordinateString(currentMatchIndexXpos, rowCountYPos, downWord.Length);
-                    }
-                    
-                    
-                    testWord = GetWordLtR(currentMatchIndexXpos, rowCountYPos, downWord.Length, gridArrayList);
-                    if (downWord.Equals(testWord))
-                    {
-                        return GetWordLtRCoordinateString(currentMatchIndexXpos, rowCountYPos, downWord.Length);
+                        return GetWordUpCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
                     
                     
-                    
-                    testWord = GetWordRtL(currentMatchIndexXpos, rowCountYPos, downWord.Length, gridArrayList);
-                    if (downWord.Equals(testWord))
+                    testWord = GetWordLtR(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    if (searchWord.Equals(testWord))
                     {
-                        return GetWordRtLCoordinateString(currentMatchIndexXpos, rowCountYPos, downWord.Length);
+                        return GetWordLtRCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                    }
+                    
+                    
+                    
+                    testWord = GetWordRtL(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    if (searchWord.Equals(testWord))
+                    {
+                        return GetWordRtLCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
 
                     currentMatchIndexXpos++;
