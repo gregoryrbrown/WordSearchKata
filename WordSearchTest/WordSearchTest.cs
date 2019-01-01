@@ -95,6 +95,23 @@ namespace WordSearchTest
             Assert.Equal(expectedResults, actualResults);
         }
         
+        
+        [Theory]
+        [InlineData(1)]
+        public void WordSearch_Finds_Word_in_up_and_to_left_direction(int testCase)
+        {
+            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
+
+            string searchWord = "SCOTTY";
+
+            List<List<char>> gridArrayList = GetGridList(testCase);
+
+            string expectedResults = GetExpecteUpLeftWorddResults(testCase);
+            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+
+            Assert.Equal(expectedResults, actualResults);
+        }
+        
         private string GetExpecteUpWorddResults(int testCase)
         {
             if (1 == testCase)
@@ -170,6 +187,17 @@ namespace WordSearchTest
             
             
             
+            return "";
+        }
+        
+        
+        private string GetExpecteUpLeftWorddResults(int testCase)
+        {
+            if (1 == testCase )
+            {
+                return "(11,7),(10,6),(9,5),(8,4),(7,3),(6,2)";
+            }
+   
             return "";
         }
         

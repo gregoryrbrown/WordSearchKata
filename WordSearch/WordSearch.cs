@@ -53,6 +53,13 @@ namespace WordSearch
                     {
                         return GetWordUpRightCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
+                    
+                    
+                    testWord = GetWordUpLeft(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    if (searchWord.Equals(testWord))
+                    {
+                        return GetWordUpLeftCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                    }
 
                     currentMatchIndexXpos++;
                 }
@@ -192,6 +199,31 @@ namespace WordSearch
             return testword.ToString();
         }
 
+        
+        private string GetWordUpLeft(int firstLetterXpos, int firstLetterYPos, int wordLength,
+            List<List<char>> gridArrayList)
+        {
+            StringBuilder testword = new StringBuilder(wordLength);
+            for (int characterCount = 0; characterCount < wordLength; characterCount++)
+            {
+                if (firstLetterYPos - characterCount >= 0 && (firstLetterXpos - characterCount) >= 0)
+                {
+                    testword.Append(gridArrayList[firstLetterYPos - characterCount][firstLetterXpos - characterCount]);
+                }
+            }
+            return testword.ToString();
+        }
+
+        private string GetWordUpLeftCoordinateString(int firstLetterXpos, int firstLetterYPos, int wordLength)
+        {
+            StringBuilder testword = new StringBuilder();
+            testword.Append("(" + firstLetterXpos +"," + firstLetterYPos + ")");
+            for (int characterCount = 1; characterCount < wordLength; characterCount++)
+            {
+                testword.Append(",(" + (firstLetterXpos - characterCount) +"," + (firstLetterYPos - characterCount) + ")");
+            }
+            return testword.ToString();
+        }
         
     }
 }
