@@ -42,6 +42,23 @@ namespace WordSearchTest
         }
         
         
+        [Theory]
+        [InlineData(1)]
+        public void WordSearch_Finds_Word_in_left_to_right_direction(int testCase)
+        {
+            WordSearch.WordSearch downwardsFinder = new WordSearch.WordSearch();
+
+            string downWord = "UHURA";
+
+            List<List<char>> gridArrayList = GetGridList(testCase);
+
+            string expectedResults = GetExpecteLtRWorddResults(testCase);
+            string actualResults = downwardsFinder.FindWord(downWord, gridArrayList);
+
+            Assert.Equal(expectedResults, actualResults);
+        }
+        
+        
         
         private string GetExpecteUpWorddResults(int testCase)
         {
@@ -73,6 +90,17 @@ namespace WordSearchTest
 
             return "";
         }
+
+        private string GetExpecteLtRWorddResults(int testCase)
+        {
+            if (1 == testCase)
+            {
+                return "(9,8),(10,8),(11,8),(12,8),(13,8)";
+            }
+
+            return "";
+        }
+        
         
         private List<List<char>> GetGridList(int testCase)
         {
