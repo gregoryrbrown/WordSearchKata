@@ -60,6 +60,22 @@ namespace WordSearchTest
         }
         
         
+        [Theory]
+        [InlineData(1)]
+        public void WordSearch_Finds_Word_in_right_to_left_direction(int testCase)
+        {
+            WordSearch.WordSearch downwardsFinder = new WordSearch.WordSearch();
+
+            string downWord = "ZECTTE";
+
+            List<List<char>> gridArrayList = GetGridList(testCase);
+
+            string expectedResults = GetExpecteRtLWorddResults(testCase);
+            string actualResults = downwardsFinder.FindWord(downWord, gridArrayList);
+
+            Assert.Equal(expectedResults, actualResults);
+        }
+        
         
         private string GetExpecteUpWorddResults(int testCase)
         {
@@ -97,6 +113,18 @@ namespace WordSearchTest
             if (1 == testCase || 4 == testCase)
             {
                 return "(9,8),(10,8),(11,8),(12,8),(13,8)";
+            }
+
+            return "";
+        }
+        
+        
+        
+        private string GetExpecteRtLWorddResults(int testCase)
+        {
+            if (1 == testCase )
+            {
+                return "(7,14),(6,14),(5,14),(4,14),(3,14),(2,14)";
             }
 
             return "";
