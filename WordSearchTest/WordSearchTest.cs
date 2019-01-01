@@ -132,6 +132,21 @@ namespace WordSearchTest
         }
         
         
+        [Theory]
+        [InlineData(1)]
+        public void WordSearch_Finds_Word_in_down_and_to_left_direction(int testCase)
+        {
+            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
+
+            string searchWord = "SULU";
+
+            List<List<char>> gridArrayList = GetGridList(testCase);
+
+            string expectedResults = GetExpecteDownLeftWorddResults(testCase);
+            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+
+            Assert.Equal(expectedResults, actualResults);
+        }
 
         
         private string GetExpecteUpWorddResults(int testCase)
@@ -233,6 +248,18 @@ namespace WordSearchTest
             {
                 return "(11,11),(12,12),(13,13),(14,14)";
             }
+            
+            return "";
+        }
+        
+        
+        private string GetExpecteDownLeftWorddResults(int testCase)
+        {
+            if (1 == testCase )
+            {
+                return "(12,11),(11,12),(10,13),(9,14)";
+            }
+
             
             return "";
         }
