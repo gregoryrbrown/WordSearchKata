@@ -78,6 +78,22 @@ namespace WordSearchTest
         }
         
         
+        [Theory]
+        [InlineData(1)]
+        public void WordSearch_Finds_Word_in_up_and_to_right_direction(int testCase)
+        {
+            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
+
+            string searchWord = "SPOCK";
+
+            List<List<char>> gridArrayList = GetGridList(testCase);
+
+            string expectedResults = GetExpecteUpRightWorddResults(testCase);
+            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+
+            Assert.Equal(expectedResults, actualResults);
+        }
+        
         private string GetExpecteUpWorddResults(int testCase)
         {
             if (1 == testCase)
@@ -121,6 +137,7 @@ namespace WordSearchTest
         
         
         
+        
         private string GetExpecteRtLWorddResults(int testCase)
         {
             if (1 == testCase )
@@ -136,6 +153,17 @@ namespace WordSearchTest
             return "";
         }
         
+        
+        private string GetExpecteUpRightWorddResults(int testCase)
+        {
+            if (1 == testCase )
+            {
+                return "(7,4),(8,3),(9,2),(10,1),(11,0)";
+            }
+
+            
+            return "";
+        }
         
         private List<List<char>> GetGridList(int testCase)
         {
@@ -254,6 +282,9 @@ namespace WordSearchTest
                 };
             }
 
+            
+
+            
             return new List<List<char>>();
 
         }
