@@ -116,6 +116,7 @@ namespace WordSearchTest
         
         [Theory]
         [InlineData(1)]
+        [InlineData(8)]
         public void WordSearch_Finds_Word_in_down_and_to_right_direction(int testCase)
         {
             WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
@@ -129,6 +130,8 @@ namespace WordSearchTest
 
             Assert.Equal(expectedResults, actualResults);
         }
+        
+        
 
         
         private string GetExpecteUpWorddResults(int testCase)
@@ -226,6 +229,11 @@ namespace WordSearchTest
                 return "(4,2),(5,3),(6,4),(7,5)";
             }
 
+            if (8 == testCase )
+            {
+                return "(11,11),(12,12),(13,13),(14,14)";
+            }
+            
             return "";
         }
         
@@ -390,6 +398,29 @@ namespace WordSearchTest
                     new List<char> {'W', 'O', 'S', 'F', 'R', 'W', 'S', 'S', 'P', 'V', 'J', 'U', 'I', 'I', 'I'},
                     new List<char> {'C', 'V', 'C', 'C', 'Z', 'S', 'Y', 'O', 'X', 'K', 'L', 'W', 'E', 'Z', 'O'},
                     new List<char> {'K', 'T', 'E', 'S', 'T', 'C', 'E', 'Z', 'V', 'U', 'D', 'O', 'N', 'K', 'A'}
+                };
+            }
+            
+            
+            if (8 == testCase)
+            {
+                return new List<List<char>>
+                {
+                    new List<char> {'U', 'N', 'K', 'S', 'G', 'K', 'M', 'A', 'R', 'N', 'H', 'K', 'D', 'T', 'A'},
+                    new List<char> {'W', 'T', 'F', 'E', 'C', 'Q', 'M', 'W', 'Q', 'J', 'C', 'I', 'H', 'S', 'N'},
+                    new List<char> {'V', 'V', 'Q', 'N', 'K', 'M', 'Y', 'C', 'Y', 'O', 'W', 'R', 'J', 'W', 'N'},
+                    new List<char> {'M', 'Q', 'E', 'O', 'R', 'H', 'B', 'T', 'P', 'Y', 'E', 'K', 'Y', 'V', 'I'},
+                    new List<char> {'J', 'W', 'V', 'B', 'B', 'Y', 'R', 'S', 'T', 'Y', 'O', 'M', 'L', 'O', 'N'},
+                    new List<char> {'J', 'R', 'L', 'M', 'C', 'U', 'C', 'N', 'O', 'O', 'W', 'U', 'U', 'W', 'X'},
+                    new List<char> {'X', 'O', 'E', 'N', 'X', 'M', 'Y', 'S', 'V', 'I', 'C', 'S', 'K', 'Q', 'L'},
+                    new List<char> {'K', 'Z', 'R', 'P', 'H', 'N', 'T', 'P', 'W', 'H', 'D', 'S', 'R', 'H', 'R'},
+                    new List<char> {'Y', 'K', 'L', 'W', 'Z', 'T', 'M', 'Q', 'H', 'U', 'H', 'U', 'R', 'A', 'A'},
+                    new List<char> {'D', 'D', 'O', 'I', 'H', 'H', 'N', 'P', 'M', 'C', 'J', 'N', 'O', 'K', 'V'},
+                    new List<char> {'Y', 'X', 'X', 'I', 'V', 'K', 'E', 'G', 'A', 'G', 'J', 'P', 'M', 'P', 'R'},
+                    new List<char> {'A', 'K', 'M', 'L', 'V', 'Y', 'E', 'I', 'J', 'C', 'U', 'K', 'S', 'T', 'N'},
+                    new List<char> {'W', 'M', 'S', 'F', 'N', 'W', 'S', 'S', 'P', 'V', 'J', 'U', 'H', 'I', 'I'},
+                    new List<char> {'C', 'V', 'Z', 'C', 'Z', 'B', 'Y', 'O', 'X', 'K', 'L', 'W', 'E', 'A', 'O'},
+                    new List<char> {'K', 'T', 'E', 'T', 'T', 'C', 'E', 'Z', 'V', 'U', 'D', 'O', 'N', 'K', 'N'}
                 };
             }
             
