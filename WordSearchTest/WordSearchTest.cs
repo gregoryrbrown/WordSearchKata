@@ -113,6 +113,24 @@ namespace WordSearchTest
             Assert.Equal(expectedResults, actualResults);
         }
         
+        
+        [Theory]
+        [InlineData(1)]
+        public void WordSearch_Finds_Word_in_down_and_to_right_direction(int testCase)
+        {
+            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
+
+            string searchWord = "KHAN";
+
+            List<List<char>> gridArrayList = GetGridList(testCase);
+
+            string expectedResults = GetExpecteDownRightWorddResults(testCase);
+            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+
+            Assert.Equal(expectedResults, actualResults);
+        }
+
+        
         private string GetExpecteUpWorddResults(int testCase)
         {
             if (1 == testCase)
@@ -153,8 +171,6 @@ namespace WordSearchTest
 
             return "";
         }
-        
-        
         
         
         private string GetExpecteRtLWorddResults(int testCase)
@@ -199,6 +215,17 @@ namespace WordSearchTest
                 return "(11,7),(10,6),(9,5),(8,4),(7,3),(6,2)";
             }
             
+            return "";
+        }
+        
+        
+        private string GetExpecteDownRightWorddResults(int testCase)
+        {
+            if (1 == testCase )
+            {
+                return "(4,2),(5,3),(6,4),(7,5)";
+            }
+
             return "";
         }
         
