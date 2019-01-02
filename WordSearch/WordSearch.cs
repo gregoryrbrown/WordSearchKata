@@ -4,65 +4,67 @@ using System.Text;
 
 namespace WordSearch
 {
-    public class WordSearch
+
+
+    public class WordSearch : IWordSearch
     {
 
-        public string FindWord(string searchWord, List<List<char>> gridArrayList)
+        public string FindWordCoordinates(string searchWord, List<List<char>> searchGrid)
         {
             //lift this out because linq pukes
             char firstchar = searchWord[0];
             
-            for (int rowCountYPos = 0; rowCountYPos < gridArrayList.Count; rowCountYPos++)
+            for (int rowCountYPos = 0; rowCountYPos < searchGrid.Count; rowCountYPos++)
             {
-                int matchCount = gridArrayList[rowCountYPos].Count( x => x == firstchar);
+                int matchCount = searchGrid[rowCountYPos].Count( x => x == firstchar);
                 int currentMatchIndexXpos = 0;
                 for(int currentMatch = 0; currentMatch <  matchCount; currentMatch++)
                 {
-                    currentMatchIndexXpos = gridArrayList[rowCountYPos].IndexOf(firstchar, currentMatchIndexXpos);
+                    currentMatchIndexXpos = searchGrid[rowCountYPos].IndexOf(firstchar, currentMatchIndexXpos);
                     
-                    string testWord = GetWordDown(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    string testWord = GetWordDown(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
                     if (searchWord.Equals(testWord))
                     {
                         return GetWordDownCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
                     
-                    testWord = GetWordUp(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    testWord = GetWordUp(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
                     if (searchWord.Equals(testWord))
                     {
                         return GetWordUpCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
                     
-                    testWord = GetWordLtR(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    testWord = GetWordLtR(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
                     if (searchWord.Equals(testWord))
                     {
                         return GetWordLtRCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
                     
-                    testWord = GetWordRtL(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    testWord = GetWordRtL(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
                     if (searchWord.Equals(testWord))
                     {
                         return GetWordRtLCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
                     
-                    testWord = GetWordUpRight(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    testWord = GetWordUpRight(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
                     if (searchWord.Equals(testWord))
                     {
                         return GetWordUpRightCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
                     
-                    testWord = GetWordUpLeft(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    testWord = GetWordUpLeft(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
                     if (searchWord.Equals(testWord))
                     {
                         return GetWordUpLeftCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
                     
-                    testWord = GetWordDownRight(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    testWord = GetWordDownRight(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
                     if (searchWord.Equals(testWord))
                     {
                         return GetWordDownRightCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
                     }
                     
-                    testWord = GetWordDownLeft(currentMatchIndexXpos, rowCountYPos, searchWord.Length, gridArrayList);
+                    testWord = GetWordDownLeft(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
                     if (searchWord.Equals(testWord))
                     {
                         return GetWordDownLeftCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
@@ -78,14 +80,14 @@ namespace WordSearch
 
 
         private string GetWordDown(int firstLetterXpos, int firstLetterYPos, int wordLength,
-            List<List<char>> gridArrayList)
+            List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
-                if (firstLetterYPos + characterCount < gridArrayList.Count && firstLetterXpos < gridArrayList[0].Count)
+                if (firstLetterYPos + characterCount < searchGrid.Count && firstLetterXpos < searchGrid[0].Count)
                 {
-                    testword.Append(gridArrayList[firstLetterYPos + characterCount][firstLetterXpos]);
+                    testword.Append(searchGrid[firstLetterYPos + characterCount][firstLetterXpos]);
                 }
             }
             return testword.ToString();
@@ -103,14 +105,14 @@ namespace WordSearch
         }
         
         private string GetWordUp(int firstLetterXpos, int firstLetterYPos, int wordLength,
-            List<List<char>> gridArrayList)
+            List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
-                if (firstLetterYPos - characterCount >= 0 && firstLetterXpos < gridArrayList[0].Count)
+                if (firstLetterYPos - characterCount >= 0 && firstLetterXpos < searchGrid[0].Count)
                 {
-                    testword.Append(gridArrayList[firstLetterYPos - characterCount][firstLetterXpos]);
+                    testword.Append(searchGrid[firstLetterYPos - characterCount][firstLetterXpos]);
                 }
             }
             return testword.ToString();
@@ -130,14 +132,14 @@ namespace WordSearch
         
         
         private string GetWordLtR(int firstLetterXpos, int firstLetterYPos, int wordLength,
-            List<List<char>> gridArrayList)
+            List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
-                if (firstLetterYPos < gridArrayList.Count && (firstLetterXpos + characterCount) < gridArrayList[firstLetterYPos].Count )
+                if (firstLetterYPos < searchGrid.Count && (firstLetterXpos + characterCount) < searchGrid[firstLetterYPos].Count )
                 {
-                    testword.Append(gridArrayList[firstLetterYPos][firstLetterXpos+ characterCount]);
+                    testword.Append(searchGrid[firstLetterYPos][firstLetterXpos+ characterCount]);
                 }
             }
             return testword.ToString();
@@ -156,14 +158,14 @@ namespace WordSearch
 
 
         private string GetWordRtL(int firstLetterXpos, int firstLetterYPos, int wordLength,
-            List<List<char>> gridArrayList)
+            List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
-                if (firstLetterYPos < gridArrayList.Count && (firstLetterXpos - characterCount) >= 0 )
+                if (firstLetterYPos < searchGrid.Count && (firstLetterXpos - characterCount) >= 0 )
                 {
-                    testword.Append(gridArrayList[firstLetterYPos][firstLetterXpos - characterCount]);
+                    testword.Append(searchGrid[firstLetterYPos][firstLetterXpos - characterCount]);
                 }
             }
             return testword.ToString();
@@ -182,14 +184,14 @@ namespace WordSearch
 
         
         private string GetWordUpRight(int firstLetterXpos, int firstLetterYPos, int wordLength,
-            List<List<char>> gridArrayList)
+            List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
-                if (firstLetterYPos - characterCount >= 0 && (firstLetterXpos + characterCount) < gridArrayList.Count)
+                if (firstLetterYPos - characterCount >= 0 && (firstLetterXpos + characterCount) < searchGrid.Count)
                 {
-                    testword.Append(gridArrayList[firstLetterYPos - characterCount][firstLetterXpos + characterCount]);
+                    testword.Append(searchGrid[firstLetterYPos - characterCount][firstLetterXpos + characterCount]);
                 }
             }
             return testword.ToString();
@@ -208,14 +210,14 @@ namespace WordSearch
 
         
         private string GetWordUpLeft(int firstLetterXpos, int firstLetterYPos, int wordLength,
-            List<List<char>> gridArrayList)
+            List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
                 if (firstLetterYPos - characterCount >= 0 && (firstLetterXpos - characterCount) >= 0)
                 {
-                    testword.Append(gridArrayList[firstLetterYPos - characterCount][firstLetterXpos - characterCount]);
+                    testword.Append(searchGrid[firstLetterYPos - characterCount][firstLetterXpos - characterCount]);
                 }
             }
             return testword.ToString();
@@ -234,14 +236,14 @@ namespace WordSearch
         
         
         private string GetWordDownRight(int firstLetterXpos, int firstLetterYPos, int wordLength,
-            List<List<char>> gridArrayList)
+            List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
-                if (firstLetterYPos + characterCount < gridArrayList.Count && (firstLetterXpos + characterCount) < gridArrayList.Count)
+                if (firstLetterYPos + characterCount < searchGrid.Count && (firstLetterXpos + characterCount) < searchGrid.Count)
                 {
-                    testword.Append(gridArrayList[firstLetterYPos + characterCount][firstLetterXpos + characterCount]);
+                    testword.Append(searchGrid[firstLetterYPos + characterCount][firstLetterXpos + characterCount]);
                 }
             }
             return testword.ToString();
@@ -262,14 +264,14 @@ namespace WordSearch
         
         
         private string GetWordDownLeft(int firstLetterXpos, int firstLetterYPos, int wordLength,
-            List<List<char>> gridArrayList)
+            List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
-                if (firstLetterYPos + characterCount < gridArrayList.Count && (firstLetterXpos - characterCount) >= 0)
+                if (firstLetterYPos + characterCount < searchGrid.Count && (firstLetterXpos - characterCount) >= 0)
                 {
-                    testword.Append(gridArrayList[firstLetterYPos + characterCount][firstLetterXpos - characterCount]);
+                    testword.Append(searchGrid[firstLetterYPos + characterCount][firstLetterXpos - characterCount]);
                 }
             }
             return testword.ToString();

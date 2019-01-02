@@ -1,42 +1,43 @@
-using System;
 using System.Collections.Generic;
 using Xunit;
-using WordSearch;
 
 namespace WordSearchTest
 {
     public class WordSearchTest
     {
+        private WordSearch.WordSearch wordFinder;
+        
+        public WordSearchTest()
+        {
+            wordFinder = new WordSearch.WordSearch();
+        }
+
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
         public void WordSearch_Finds_Word_in_down_direction(int testCase)
         {
-            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
-
             string searchWord = "KIRK";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
-            string expectedResults = GetExpectedResults(testCase);
-            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+            string expectedResults = GetExpectedDownResults(testCase);
+            string actualResults = wordFinder.FindWordCoordinates(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
-        
+
         [Theory]
         [InlineData(1)]
         [InlineData(3)]
         public void WordSearch_Finds_Word_in_up_direction(int testCase)
         {
-            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
-
             string searchWord = "BONES";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
             string expectedResults = GetExpecteUpWorddResults(testCase);
-            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+            string actualResults = wordFinder.FindWordCoordinates(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -47,14 +48,12 @@ namespace WordSearchTest
         [InlineData(4)]
         public void WordSearch_Finds_Word_in_left_to_right_direction(int testCase)
         {
-            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
-
             string searchWord = "UHURA";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
-            string expectedResults = GetExpecteLtRWorddResults(testCase);
-            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+            string expectedResults = GetExpectedLtRWorddResults(testCase);
+            string actualResults = wordFinder.FindWordCoordinates(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -65,14 +64,12 @@ namespace WordSearchTest
         [InlineData(5)]
         public void WordSearch_Finds_Word_in_right_to_left_direction(int testCase)
         {
-            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
-
             string searchWord = "ZECTTE";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
-            string expectedResults = GetExpecteRtLWorddResults(testCase);
-            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+            string expectedResults = GetExpectedRtLWorddResults(testCase);
+            string actualResults = wordFinder.FindWordCoordinates(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -83,14 +80,12 @@ namespace WordSearchTest
         [InlineData(6)]
         public void WordSearch_Finds_Word_in_up_and_to_right_direction(int testCase)
         {
-            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
-
             string searchWord = "SPOCK";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
-            string expectedResults = GetExpecteUpRightWorddResults(testCase);
-            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+            string expectedResults = GetExpectedUpRightWorddResults(testCase);
+            string actualResults = wordFinder.FindWordCoordinates(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -101,14 +96,12 @@ namespace WordSearchTest
         [InlineData(7)]
         public void WordSearch_Finds_Word_in_up_and_to_left_direction(int testCase)
         {
-            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
-
             string searchWord = "SCOTTY";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
-            string expectedResults = GetExpecteUpLeftWorddResults(testCase);
-            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+            string expectedResults = GetExpectedUpLeftWorddResults(testCase);
+            string actualResults = wordFinder.FindWordCoordinates(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -119,14 +112,12 @@ namespace WordSearchTest
         [InlineData(8)]
         public void WordSearch_Finds_Word_in_down_and_to_right_direction(int testCase)
         {
-            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
-
             string searchWord = "KHAN";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
-            string expectedResults = GetExpecteDownRightWorddResults(testCase);
-            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+            string expectedResults = GetExpectedDownRightWorddResults(testCase);
+            string actualResults = wordFinder.FindWordCoordinates(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -137,14 +128,12 @@ namespace WordSearchTest
         [InlineData(9)]
         public void WordSearch_Finds_Word_in_down_and_to_left_direction(int testCase)
         {
-            WordSearch.WordSearch wordFinder = new WordSearch.WordSearch();
-
             string searchWord = "SULU";
 
             List<List<char>> gridArrayList = GetGridList(testCase);
 
-            string expectedResults = GetExpecteDownLeftWorddResults(testCase);
-            string actualResults = wordFinder.FindWord(searchWord, gridArrayList);
+            string expectedResults = GetExpectedDownLeftWorddResults(testCase);
+            string actualResults = wordFinder.FindWordCoordinates(searchWord, gridArrayList);
 
             Assert.Equal(expectedResults, actualResults);
         }
@@ -166,7 +155,7 @@ namespace WordSearchTest
         }
         
         
-        private string GetExpectedResults(int testCase)
+        private string GetExpectedDownResults(int testCase)
         {
             if (1 == testCase)
             {
@@ -181,7 +170,7 @@ namespace WordSearchTest
             return "";
         }
 
-        private string GetExpecteLtRWorddResults(int testCase)
+        private string GetExpectedLtRWorddResults(int testCase)
         {
             if (1 == testCase || 4 == testCase)
             {
@@ -192,7 +181,7 @@ namespace WordSearchTest
         }
         
         
-        private string GetExpecteRtLWorddResults(int testCase)
+        private string GetExpectedRtLWorddResults(int testCase)
         {
             if (1 == testCase )
             {
@@ -208,7 +197,7 @@ namespace WordSearchTest
         }
         
         
-        private string GetExpecteUpRightWorddResults(int testCase)
+        private string GetExpectedUpRightWorddResults(int testCase)
         {
             if (1 == testCase )
             {
@@ -227,7 +216,7 @@ namespace WordSearchTest
         }
         
         
-        private string GetExpecteUpLeftWorddResults(int testCase)
+        private string GetExpectedUpLeftWorddResults(int testCase)
         {
             if (1 == testCase || 7 == testCase)
             {
@@ -238,7 +227,7 @@ namespace WordSearchTest
         }
         
         
-        private string GetExpecteDownRightWorddResults(int testCase)
+        private string GetExpectedDownRightWorddResults(int testCase)
         {
             if (1 == testCase )
             {
@@ -254,7 +243,7 @@ namespace WordSearchTest
         }
         
         
-        private string GetExpecteDownLeftWorddResults(int testCase)
+        private string GetExpectedDownLeftWorddResults(int testCase)
         {
             if (1 == testCase )
             {
