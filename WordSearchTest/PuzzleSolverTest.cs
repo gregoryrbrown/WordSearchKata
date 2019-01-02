@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using WordSearch;
 using Moq;
@@ -17,18 +18,21 @@ namespace WordSearchTest
             _puzzleSolver = new PuzzleSolver(_wordSearchMock.Object);
         }
 
-        [Fact]
-        public void PuzzleSolver_calls_FindWord_as_many_times_as_there_are_words()
+        [Theory]
+        [InlineData("KIRK,SPOCK,BONES")]
+        [InlineData("KIRK,SPOCK")]
+        public void PuzzleSolver_calls_FindWord_as_many_times_as_there_are_words(string wordsString)
         {
-            List<string> wordStrings = new List<string>{"KIRK","SPOCK","BONES"};
+
+            List<string> wordStringList = wordsString.Split((",")).ToList();
             List<List<char>> gridArrayList = GetGridList();
 
             _wordSearchMock.Setup(x => x.FindWordCoordinates(It.IsAny<string>(), It.IsAny<List<List<char>>>()))
                 .Returns("");
 
-            _puzzleSolver.SolvePuzzle(wordStrings, gridArrayList);
+            _puzzleSolver.SolvePuzzle(wordStringList, gridArrayList);
             
-            _wordSearchMock.Verify(x => x.FindWordCoordinates(It.IsAny<string>(), It.IsAny<List<List<char>>>()), Times.Exactly(3));
+            _wordSearchMock.Verify(x => x.FindWordCoordinates(It.IsAny<string>(), It.IsAny<List<List<char>>>()), Times.Exactly(wordStringList.Count));
 
         }
         
