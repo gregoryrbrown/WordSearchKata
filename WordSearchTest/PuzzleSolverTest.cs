@@ -39,6 +39,30 @@ namespace WordSearchTest
         
         
         
+        [Theory]
+        [InlineData("KIRK,SPOCK,BONES")]
+        [InlineData("KIRK,SPOCK")]
+        [InlineData("KIRK,SPOCK,SCOTTY,BONES")]
+        public void PuzzleSolver_calls_FindWord_once_for_each_word(string wordsString)
+        {
+
+            List<string> wordStringList = wordsString.Split((",")).ToList();
+            List<List<char>> gridArrayList = GetGridList();
+
+            _wordSearchMock.Setup(x => x.FindWordCoordinates(It.IsAny<string>(), It.IsAny<List<List<char>>>()))
+                .Returns("");
+
+            _puzzleSolver.SolvePuzzle(wordStringList, gridArrayList);
+
+            foreach (var aWord in wordStringList)
+            {
+                _wordSearchMock.Verify(x => x.FindWordCoordinates(aWord, It.IsAny<List<List<char>>>()), Times.Once);    
+            }
+
+        }
+
+        
+        
         private List<List<char>> GetGridList()
         {
 
