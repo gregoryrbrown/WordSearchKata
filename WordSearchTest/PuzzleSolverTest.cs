@@ -21,6 +21,7 @@ namespace WordSearchTest
         [Theory]
         [InlineData("KIRK,SPOCK,BONES")]
         [InlineData("KIRK,SPOCK")]
+        [InlineData("KIRK,SPOCK,SCOTTY,BONES")]
         public void PuzzleSolver_calls_FindWord_as_many_times_as_there_are_words(string wordsString)
         {
 
