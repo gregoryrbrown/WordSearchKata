@@ -11,12 +11,17 @@ namespace WordSearch
             _wordSearch = wordSearch;
         }
 
-        public void SolvePuzzle(List<string> searchWords, List<List<char>> gridListArray)
+        public Dictionary<string,string> SolvePuzzle(List<string> searchWords, List<List<char>> gridListArray)
         {
+            Dictionary<string,string> coordinateResults = new Dictionary<string, string>();
+            
             foreach (var aWord in searchWords)
             {
-                _wordSearch.FindWordCoordinates(aWord, new List<List<char>>());                
+                    var coords = _wordSearch.FindWordCoordinates(aWord, new List<List<char>>());
+                    coordinateResults.Add(aWord, coords);
             }
+
+            return coordinateResults;
         }
         
         

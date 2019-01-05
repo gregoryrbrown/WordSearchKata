@@ -15,6 +15,9 @@ namespace WordSearchTest
         {
             _wordSearchMock = new Mock<IWordSearch>();
             
+            _wordSearchMock.Setup(x => x.FindWordCoordinates(It.IsAny<string>(), It.IsAny<List<List<char>>>()))
+                .Returns("");
+            
             _puzzleSolver = new PuzzleSolver(_wordSearchMock.Object);
         }
 
@@ -27,9 +30,6 @@ namespace WordSearchTest
 
             List<string> wordStringList = wordsString.Split((",")).ToList();
             List<List<char>> gridArrayList = GetGridList();
-
-            _wordSearchMock.Setup(x => x.FindWordCoordinates(It.IsAny<string>(), It.IsAny<List<List<char>>>()))
-                .Returns("");
 
             _puzzleSolver.SolvePuzzle(wordStringList, gridArrayList);
             
@@ -49,9 +49,6 @@ namespace WordSearchTest
             List<string> wordStringList = wordsString.Split((",")).ToList();
             List<List<char>> gridArrayList = GetGridList();
 
-            _wordSearchMock.Setup(x => x.FindWordCoordinates(It.IsAny<string>(), It.IsAny<List<List<char>>>()))
-                .Returns("");
-
             _puzzleSolver.SolvePuzzle(wordStringList, gridArrayList);
 
             foreach (var aWord in wordStringList)
@@ -60,8 +57,42 @@ namespace WordSearchTest
             }
 
         }
-
         
+        
+        [Fact]
+        public void PuzzleSolver_returns_a_mapping_from_a_search_word_to_a_string_of_coordinates()
+        {
+            List<string> wordStringList = new List<string>(){ "KIRK","SPOCK","SCOTTY"};
+            List<List<char>> gridArrayList = GetGridList();
+
+            _wordSearchMock.Setup(x => x.FindWordCoordinates("KIRK", It.IsAny<List<List<char>>>()))
+                .Returns("(1,1),(2,2),(3,3)");
+
+            _wordSearchMock.Setup(x => x.FindWordCoordinates("SPOCK", It.IsAny<List<List<char>>>()))
+                .Returns("(4,4),(5,5),(6,6)");
+            
+            _wordSearchMock.Setup(x => x.FindWordCoordinates("SCOTTY", It.IsAny<List<List<char>>>()))
+                .Returns("(7,7),(8,8),(9,9)");
+            
+            Dictionary<string,string> resultDictionary = _puzzleSolver.SolvePuzzle(wordStringList, gridArrayList);
+
+            string theCoords = "";
+
+            Assert.True(resultDictionary.TryGetValue("KIRK", out theCoords));
+            
+            Assert.Equal("(1,1),(2,2),(3,3)", theCoords);
+            
+            Assert.True(resultDictionary.TryGetValue("SPOCK", out theCoords));
+            
+            Assert.Equal("(4,4),(5,5),(6,6)", theCoords);
+            
+            Assert.True(resultDictionary.TryGetValue("SCOTTY", out theCoords));
+            
+            Assert.Equal("(7,7),(8,8),(9,9)",theCoords);
+            
+
+        }
+
         
         private List<List<char>> GetGridList()
         {
