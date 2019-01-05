@@ -94,6 +94,28 @@ namespace WordSearchTest
         }
 
         
+        [Fact]
+        public void PuzzleSolver_ignores_duplicate_search_words()
+        {
+            List<string> wordStringList = new List<string>(){ "KIRK","KIRK","SCOTTY"};
+            List<List<char>> gridArrayList = GetGridList();
+
+            _wordSearchMock.Setup(x => x.FindWordCoordinates("KIRK", It.IsAny<List<List<char>>>()))
+                .Returns("(1,1),(2,2),(3,3)");
+            
+            Dictionary<string,string> resultDictionary = _puzzleSolver.SolvePuzzle(wordStringList, gridArrayList);
+
+            string kirkCoords = "";
+
+            Assert.True(resultDictionary.TryGetValue("KIRK", out kirkCoords));
+            
+            Assert.Equal(2, resultDictionary.Count);
+    
+
+        }
+
+        
+        
         private List<List<char>> GetGridList()
         {
 

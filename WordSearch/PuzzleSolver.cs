@@ -17,8 +17,11 @@ namespace WordSearch
             
             foreach (var aWord in searchWords)
             {
+                if (!coordinateResults.ContainsKey(aWord))
+                {
                     var coords = _wordSearch.FindWordCoordinates(aWord, new List<List<char>>());
                     coordinateResults.Add(aWord, coords);
+                }
             }
 
             return coordinateResults;
