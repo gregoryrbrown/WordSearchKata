@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace WordSearch
 {
-    public class WordSearchFileParser
+    public class WordSearchFileParser : IWordSearchFileParser
     {
 
         public Tuple<List<string>, List<List<char>>> ParsePuzzleFile(string filePath)
@@ -37,9 +37,6 @@ namespace WordSearch
             {
                 Console.WriteLine(ex.Message);
             }
-            
-            
-            
             
             return new Tuple<List<string>, List<List<char>>>(searchWords, characterGrid);
                 

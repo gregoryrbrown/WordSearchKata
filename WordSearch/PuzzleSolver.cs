@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace WordSearch
 {
-    public class PuzzleSolver
+    public class PuzzleSolver : IPuzzleSolver
     {
         private IWordSearch _wordSearch;
         
