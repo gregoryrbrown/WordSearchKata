@@ -18,4 +18,11 @@
       <ProjectReference Include="..\WordSearch\WordSearch.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="testWordSearchPuzzle.txt" />
+      <EmbeddedResource Include="testWordSearchPuzzle.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
 </Project>

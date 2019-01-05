@@ -1,0 +1,16 @@
+SPOCK,KIRK,SCOTTY,UHURA,SULU
+U,N,K,S,G,K,M,A,R,N,H,K,D,T,A
+W,T,F,E,C,Q,M,W,Q,J,C,I,H,S,N
+V,V,Q,N,K,M,Y,C,Y,O,W,R,J,W,N
+M,Q,E,O,R,H,B,T,P,Y,E,K,Y,V,I
+J,W,V,B,B,Y,A,S,T,Y,O,M,L,O,N
+J,R,L,M,C,U,C,N,O,O,W,U,U,W,X
+X,O,E,N,X,M,Y,S,V,I,C,S,R,Q,L
+K,Z,R,P,H,N,T,P,W,H,D,S,R,F,R
+Y,K,L,W,Z,T,M,Q,H,U,H,U,R,A,K
+D,D,O,I,H,H,N,P,M,C,J,N,O,K,V
+Y,X,X,I,V,K,E,G,A,G,J,P,M,P,R
+A,K,M,L,V,Y,E,I,J,C,U,S,S,T,N
+W,M,S,F,N,W,S,S,P,V,J,U,I,I,I
+C,V,Z,C,Z,B,Y,O,X,K,L,W,E,Z,O
+K,T,E,T,T,C,E,Z,V,U,D,O,N,K,A
