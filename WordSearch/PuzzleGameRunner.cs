@@ -14,16 +14,11 @@ namespace WordSearch
             _wordSearchFileParser = wordSearchFileParser;
         }
 
-
-
-
         public void Run(string filename)
         {
             Tuple<List<string>, List<List<char>>> puzzleParts = _wordSearchFileParser.ParsePuzzleFile(filename);
 
-
-
-
+            _puzzleSolver.SolvePuzzle(puzzleParts.Item1, puzzleParts.Item2);
         }
     }
 }

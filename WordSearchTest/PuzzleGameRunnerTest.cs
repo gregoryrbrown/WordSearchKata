@@ -33,11 +33,17 @@ namespace WordSearchTest
         [Fact]
         public void PuzzleGameRunner_Run_calls_ParsePuzzleFile_once()
         {
-
             _puzzleGameRunner.Run("some_file_name.txt");
-            
-            _wordSearchFileParserMock.Verify(x => x.ParsePuzzleFile(It.IsAny<string>()), Times.Once);
 
+            _wordSearchFileParserMock.Verify(x => x.ParsePuzzleFile(It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact]
+        public void PuzzleGameRunner_Run_calls_SolvePuzzle_once()
+        {
+            _puzzleGameRunner.Run("some_file_name.txt");
+
+            _puzzleSolverMock.Verify(x => x.SolvePuzzle(It.IsAny<List<string>>(), It.IsAny<List<List<char>>>()), Times.Once);
         }
         
     }
