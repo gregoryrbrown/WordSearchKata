@@ -13,13 +13,16 @@ namespace WordSearchTest
         private Mock<IPuzzleSolver> _puzzleSolverMock;
         private Mock<IWordSearchFileParser> _wordSearchFileParserMock;
 
+        private Dictionary<string, string> gameResultsDictionary;
+
         public PuzzleGameRunnerTest()
         {
+            gameResultsDictionary = new Dictionary<string, string>(); 
             
             _puzzleSolverMock = new Mock<IPuzzleSolver>();
 
             _puzzleSolverMock.Setup(x => x.SolvePuzzle(It.IsAny<List<string>>(), It.IsAny<List<List<char>>>()))
-                .Returns(new Dictionary<string, string>());
+                .Returns(gameResultsDictionary);
             
             _wordSearchFileParserMock = new Mock<IWordSearchFileParser>();
 
@@ -46,5 +49,13 @@ namespace WordSearchTest
             _puzzleSolverMock.Verify(x => x.SolvePuzzle(It.IsAny<List<string>>(), It.IsAny<List<List<char>>>()), Times.Once);
         }
         
+        [Fact]
+        public void PuzzleGameRunner_Run_returns_Dictionary_returned_by_puzzleSolver()
+        {
+            Dictionary<string,string> gameResults = _puzzleGameRunner.Run("some_file_name.txt");
+
+            Assert.Same(gameResults, gameResultsDictionary);
+        }
+
     }
 }
