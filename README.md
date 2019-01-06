@@ -18,6 +18,8 @@ To build, run:  dotnet build
 
 To run the command line application, run: dotnet run --project WordSearchGame/WordSearchGame.csproj some_file_here.txt
 
+To run the command line application using the game definition file in the WordSearchTest project, run: dotnet run --project WordSearchGame/WordSearchGame.csproj WordSearchTest/testWordSearchPuzzle.txt
+
 To run the unit tests in the solution, run: dotnet test WordSearchTest/
 
 There should be 29 tests. 
