@@ -6,7 +6,7 @@ namespace WordSearch
 {
 
 
-    public class WordSearch : IWordSearch
+    public class WordFinder : IWordFinder
     {
 
         public string FindWordCoordinates(string searchWord, List<List<char>> searchGrid)

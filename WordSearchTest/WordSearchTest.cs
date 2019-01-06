@@ -5,11 +5,11 @@ namespace WordSearchTest
 {
     public class WordSearchTest
     {
-        private WordSearch.WordSearch wordFinder;
+        private WordSearch.WordFinder wordFinder;
         
         public WordSearchTest()
         {
-            wordFinder = new WordSearch.WordSearch();
+            wordFinder = new WordSearch.WordFinder();
         }
 
         [Theory]

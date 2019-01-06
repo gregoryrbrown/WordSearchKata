@@ -9,11 +9,11 @@ namespace WordSearchTest
     public class PuzzleSolverTest
     {
         private PuzzleSolver _puzzleSolver;
-        private Mock<IWordSearch> _wordSearchMock;
+        private Mock<IWordFinder> _wordSearchMock;
         
         public PuzzleSolverTest()
         {
-            _wordSearchMock = new Mock<IWordSearch>();
+            _wordSearchMock = new Mock<IWordFinder>();
             
             _wordSearchMock.Setup(x => x.FindWordCoordinates(It.IsAny<string>(), It.IsAny<List<List<char>>>()))
                 .Returns("");

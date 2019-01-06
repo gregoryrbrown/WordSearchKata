@@ -4,11 +4,11 @@ namespace WordSearch
 {
     public class PuzzleSolver : IPuzzleSolver
     {
-        private IWordSearch _wordSearch;
+        private IWordFinder _wordFinder;
         
-        public PuzzleSolver(IWordSearch wordSearch)
+        public PuzzleSolver(IWordFinder wordFinder)
         {
-            _wordSearch = wordSearch;
+            _wordFinder = wordFinder;
         }
 
         public Dictionary<string,string> SolvePuzzle(List<string> searchWords, List<List<char>> gridListArray)
@@ -19,7 +19,7 @@ namespace WordSearch
             {
                 if (!coordinateResults.ContainsKey(aWord))
                 {
-                    var coords = _wordSearch.FindWordCoordinates(aWord, new List<List<char>>());
+                    var coords = _wordFinder.FindWordCoordinates(aWord, gridListArray);
                     coordinateResults.Add(aWord, coords);
                 }
             }

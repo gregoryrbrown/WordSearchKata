@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearch", "WordSearch\Wo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearchTest", "WordSearchTest\WordSearchTest.csproj", "{6C9A58C8-94B7-4A06-B549-CDAB8CC85CEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearchGame", "WordSearchGame\WordSearchGame.csproj", "{48398862-96FD-40B2-9FAC-D05B457076C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{6C9A58C8-94B7-4A06-B549-CDAB8CC85CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C9A58C8-94B7-4A06-B549-CDAB8CC85CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C9A58C8-94B7-4A06-B549-CDAB8CC85CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48398862-96FD-40B2-9FAC-D05B457076C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48398862-96FD-40B2-9FAC-D05B457076C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48398862-96FD-40B2-9FAC-D05B457076C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48398862-96FD-40B2-9FAC-D05B457076C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
