@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -22,52 +23,52 @@ namespace WordSearch
                 {
                     currentMatchIndexXpos = searchGrid[rowCountYPos].IndexOf(firstchar, currentMatchIndexXpos);
                     
-                    string testWord = GetWordDown(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
-                    if (searchWord.Equals(testWord))
+                    Tuple<string,string> testWordAndCoords = GetWordDown(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
+                    if (searchWord.Equals(testWordAndCoords.Item1))
                     {
-                        return GetWordDownCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                        return testWordAndCoords.Item2; 
                     }
                     
-                    testWord = GetWordUp(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
-                    if (searchWord.Equals(testWord))
+                    testWordAndCoords = GetWordUp(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
+                    if (searchWord.Equals(testWordAndCoords.Item1))
                     {
-                        return GetWordUpCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                        return testWordAndCoords.Item2;
                     }
                     
-                    testWord = GetWordLtR(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
-                    if (searchWord.Equals(testWord))
+                    testWordAndCoords = GetWordLtR(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
+                    if (searchWord.Equals(testWordAndCoords.Item1))
                     {
-                        return GetWordLtRCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                        return testWordAndCoords.Item2;
                     }
                     
-                    testWord = GetWordRtL(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
-                    if (searchWord.Equals(testWord))
+                    testWordAndCoords = GetWordRtL(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
+                    if (searchWord.Equals(testWordAndCoords.Item1))
                     {
-                        return GetWordRtLCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                        return testWordAndCoords.Item2;
                     }
                     
-                    testWord = GetWordUpRight(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
-                    if (searchWord.Equals(testWord))
+                    testWordAndCoords = GetWordUpRight(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
+                    if (searchWord.Equals(testWordAndCoords.Item1))
                     {
-                        return GetWordUpRightCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                        return testWordAndCoords.Item2;
                     }
                     
-                    testWord = GetWordUpLeft(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
-                    if (searchWord.Equals(testWord))
+                    testWordAndCoords = GetWordUpLeft(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
+                    if (searchWord.Equals(testWordAndCoords.Item1))
                     {
-                        return GetWordUpLeftCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                        return testWordAndCoords.Item2;
                     }
                     
-                    testWord = GetWordDownRight(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
-                    if (searchWord.Equals(testWord))
+                    testWordAndCoords = GetWordDownRight(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
+                    if (searchWord.Equals(testWordAndCoords.Item1))
                     {
-                        return GetWordDownRightCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                        return testWordAndCoords.Item2;
                     }
                     
-                    testWord = GetWordDownLeft(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
-                    if (searchWord.Equals(testWord))
+                    testWordAndCoords = GetWordDownLeft(currentMatchIndexXpos, rowCountYPos, searchWord.Length, searchGrid);
+                    if (searchWord.Equals(testWordAndCoords.Item1))
                     {
-                        return GetWordDownLeftCoordinateString(currentMatchIndexXpos, rowCountYPos, searchWord.Length);
+                        return testWordAndCoords.Item2;
                     }
 
                     currentMatchIndexXpos++;
@@ -79,214 +80,174 @@ namespace WordSearch
         }
 
 
-        private string GetWordDown(int firstLetterXpos, int firstLetterYPos, int wordLength,
+        private Tuple<string,string> GetWordDown(int firstLetterXpos, int firstLetterYPos, int wordLength,
             List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
+            StringBuilder testwordCoords = new StringBuilder();
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
                 if (firstLetterYPos + characterCount < searchGrid.Count && firstLetterXpos < searchGrid[0].Count)
                 {
                     testword.Append(searchGrid[firstLetterYPos + characterCount][firstLetterXpos]);
+                    if (characterCount > 0)
+                    {
+                        testwordCoords.Append(",");
+                    }
+                    testwordCoords.Append("(" + firstLetterXpos +"," + (firstLetterYPos + characterCount) + ")");
                 }
             }
-            return testword.ToString();
-        }
-
-        private string GetWordDownCoordinateString(int firstLetterXpos, int firstLetterYPos, int wordLength)
-        {
-            StringBuilder testword = new StringBuilder();
-            testword.Append("(" + firstLetterXpos +"," + firstLetterYPos + ")");
-            for (int characterCount = 1; characterCount < wordLength; characterCount++)
-            {
-                    testword.Append(",(" + firstLetterXpos +"," + (firstLetterYPos+ characterCount) + ")");
-            }
-            return testword.ToString();
+            return new Tuple<string,string>( item1: testword.ToString(), item2: testwordCoords.ToString());
         }
         
-        private string GetWordUp(int firstLetterXpos, int firstLetterYPos, int wordLength,
+        private Tuple<string,string> GetWordUp(int firstLetterXpos, int firstLetterYPos, int wordLength,
             List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
+            StringBuilder testwordCoords = new StringBuilder();
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
                 if (firstLetterYPos - characterCount >= 0 && firstLetterXpos < searchGrid[0].Count)
                 {
                     testword.Append(searchGrid[firstLetterYPos - characterCount][firstLetterXpos]);
+                    
+                    if (characterCount > 0)
+                    {
+                        testwordCoords.Append(",");
+                    }
+                    testwordCoords.Append("(" + firstLetterXpos +"," + (firstLetterYPos - characterCount) + ")");
                 }
             }
-            return testword.ToString();
+            return new Tuple<string,string>( item1: testword.ToString(), item2: testwordCoords.ToString());
         }
 
-        private string GetWordUpCoordinateString(int firstLetterXpos, int firstLetterYPos, int wordLength)
-        {
-            StringBuilder testword = new StringBuilder();
-            testword.Append("(" + firstLetterXpos +"," + firstLetterYPos + ")");
-            for (int characterCount = 1; characterCount < wordLength; characterCount++)
-            {
-                testword.Append(",(" + firstLetterXpos +"," + (firstLetterYPos - characterCount) + ")");
-            }
-            return testword.ToString();
-        }
         
-        
-        
-        private string GetWordLtR(int firstLetterXpos, int firstLetterYPos, int wordLength,
+        private Tuple<string,string> GetWordLtR(int firstLetterXpos, int firstLetterYPos, int wordLength,
             List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
+            StringBuilder testwordCoords = new StringBuilder();
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
                 if (firstLetterYPos < searchGrid.Count && (firstLetterXpos + characterCount) < searchGrid[firstLetterYPos].Count )
                 {
                     testword.Append(searchGrid[firstLetterYPos][firstLetterXpos+ characterCount]);
+                    if (characterCount > 0)
+                    {
+                        testwordCoords.Append(",");
+                    }
+                    testwordCoords.Append("(" + (firstLetterXpos + characterCount) +"," + firstLetterYPos  + ")");
                 }
             }
-            return testword.ToString();
+            return new Tuple<string,string>( item1: testword.ToString(), item2: testwordCoords.ToString());
         }
 
-        private string GetWordLtRCoordinateString(int firstLetterXpos, int firstLetterYPos, int wordLength)
-        {
-            StringBuilder testword = new StringBuilder();
-            testword.Append("(" + firstLetterXpos +"," + firstLetterYPos + ")");
-            for (int characterCount = 1; characterCount < wordLength; characterCount++)
-            {
-                testword.Append(",(" + (firstLetterXpos + characterCount) +"," + firstLetterYPos  + ")");
-            }
-            return testword.ToString();
-        }
-
-
-        private string GetWordRtL(int firstLetterXpos, int firstLetterYPos, int wordLength,
+        
+        private Tuple<string,string> GetWordRtL(int firstLetterXpos, int firstLetterYPos, int wordLength,
             List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
+            StringBuilder testwordCoords = new StringBuilder();
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
                 if (firstLetterYPos < searchGrid.Count && (firstLetterXpos - characterCount) >= 0 )
                 {
                     testword.Append(searchGrid[firstLetterYPos][firstLetterXpos - characterCount]);
+                    if (characterCount > 0)
+                    {
+                        testwordCoords.Append(",");
+                    }
+                    testwordCoords.Append("(" + (firstLetterXpos - characterCount) +"," + firstLetterYPos  + ")");
                 }
             }
-            return testword.ToString();
-        }
-
-        private string GetWordRtLCoordinateString(int firstLetterXpos, int firstLetterYPos, int wordLength)
-        {
-            StringBuilder testword = new StringBuilder();
-            testword.Append("(" + firstLetterXpos +"," + firstLetterYPos + ")");
-            for (int characterCount = 1; characterCount < wordLength; characterCount++)
-            {
-                testword.Append(",(" + (firstLetterXpos - characterCount) +"," + firstLetterYPos  + ")");
-            }
-            return testword.ToString();
+            return new Tuple<string,string>( item1: testword.ToString(), item2: testwordCoords.ToString());
         }
 
         
-        private string GetWordUpRight(int firstLetterXpos, int firstLetterYPos, int wordLength,
+        private Tuple<string,string> GetWordUpRight(int firstLetterXpos, int firstLetterYPos, int wordLength,
             List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
+            StringBuilder testwordCoords = new StringBuilder();
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
                 if (firstLetterYPos - characterCount >= 0 && (firstLetterXpos + characterCount) < searchGrid.Count)
                 {
                     testword.Append(searchGrid[firstLetterYPos - characterCount][firstLetterXpos + characterCount]);
+                    if (characterCount > 0)
+                    {
+                        testwordCoords.Append(",");
+                    }
+                    testwordCoords.Append("(" + (firstLetterXpos + characterCount) +"," + (firstLetterYPos - characterCount) + ")");
                 }
             }
-            return testword.ToString();
-        }
-
-        private string GetWordUpRightCoordinateString(int firstLetterXpos, int firstLetterYPos, int wordLength)
-        {
-            StringBuilder testword = new StringBuilder();
-            testword.Append("(" + firstLetterXpos +"," + firstLetterYPos + ")");
-            for (int characterCount = 1; characterCount < wordLength; characterCount++)
-            {
-                testword.Append(",(" + (firstLetterXpos + characterCount) +"," + (firstLetterYPos - characterCount) + ")");
-            }
-            return testword.ToString();
+            return new Tuple<string,string>( item1: testword.ToString(), item2: testwordCoords.ToString());
         }
 
         
-        private string GetWordUpLeft(int firstLetterXpos, int firstLetterYPos, int wordLength,
+        private Tuple<string,string> GetWordUpLeft(int firstLetterXpos, int firstLetterYPos, int wordLength,
             List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
+            StringBuilder testwordCoords = new StringBuilder();
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
                 if (firstLetterYPos - characterCount >= 0 && (firstLetterXpos - characterCount) >= 0)
                 {
                     testword.Append(searchGrid[firstLetterYPos - characterCount][firstLetterXpos - characterCount]);
+                    if (characterCount > 0)
+                    {
+                        testwordCoords.Append(",");
+                    }
+                    testwordCoords.Append("(" + (firstLetterXpos - characterCount) +"," + (firstLetterYPos - characterCount) + ")");
                 }
             }
-            return testword.ToString();
+            return new Tuple<string,string>( item1: testword.ToString(), item2: testwordCoords.ToString());
         }
 
-        private string GetWordUpLeftCoordinateString(int firstLetterXpos, int firstLetterYPos, int wordLength)
-        {
-            StringBuilder testword = new StringBuilder();
-            testword.Append("(" + firstLetterXpos +"," + firstLetterYPos + ")");
-            for (int characterCount = 1; characterCount < wordLength; characterCount++)
-            {
-                testword.Append(",(" + (firstLetterXpos - characterCount) +"," + (firstLetterYPos - characterCount) + ")");
-            }
-            return testword.ToString();
-        }
         
-        
-        private string GetWordDownRight(int firstLetterXpos, int firstLetterYPos, int wordLength,
+        private Tuple<string,string> GetWordDownRight(int firstLetterXpos, int firstLetterYPos, int wordLength,
             List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
+            StringBuilder testwordCoords = new StringBuilder();
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
                 if (firstLetterYPos + characterCount < searchGrid.Count && (firstLetterXpos + characterCount) < searchGrid.Count)
                 {
                     testword.Append(searchGrid[firstLetterYPos + characterCount][firstLetterXpos + characterCount]);
+                    if (characterCount > 0)
+                    {
+                        testwordCoords.Append(",");
+                    }
+                    testwordCoords.Append("(" + (firstLetterXpos + characterCount) +"," + (firstLetterYPos + characterCount) + ")");
                 }
             }
-            return testword.ToString();
+
+            return new Tuple<string, string>(item1: testword.ToString(), item2: testwordCoords.ToString());
         }
 
-        private string GetWordDownRightCoordinateString(int firstLetterXpos, int firstLetterYPos, int wordLength)
-        {
-            StringBuilder testword = new StringBuilder();
-            testword.Append("(" + firstLetterXpos +"," + firstLetterYPos + ")");
-            for (int characterCount = 1; characterCount < wordLength; characterCount++)
-            {
-                testword.Append(",(" + (firstLetterXpos + characterCount) +"," + (firstLetterYPos + characterCount) + ")");
-            }
-            return testword.ToString();
-        }
         
-        
-        
-        
-        private string GetWordDownLeft(int firstLetterXpos, int firstLetterYPos, int wordLength,
+        private Tuple<string,string> GetWordDownLeft(int firstLetterXpos, int firstLetterYPos, int wordLength,
             List<List<char>> searchGrid)
         {
             StringBuilder testword = new StringBuilder(wordLength);
+            StringBuilder testwordCoords = new StringBuilder();
             for (int characterCount = 0; characterCount < wordLength; characterCount++)
             {
                 if (firstLetterYPos + characterCount < searchGrid.Count && (firstLetterXpos - characterCount) >= 0)
                 {
                     testword.Append(searchGrid[firstLetterYPos + characterCount][firstLetterXpos - characterCount]);
+                    if (characterCount > 0)
+                    {
+                        testwordCoords.Append(",");
+                    }
+                    testwordCoords.Append("(" + (firstLetterXpos - characterCount) +"," + (firstLetterYPos + characterCount) + ")");
                 }
             }
-            return testword.ToString();
+            return new Tuple<string,string>( item1: testword.ToString(), item2: testwordCoords.ToString());
         }
 
-        private string GetWordDownLeftCoordinateString(int firstLetterXpos, int firstLetterYPos, int wordLength)
-        {
-            StringBuilder testword = new StringBuilder();
-            testword.Append("(" + firstLetterXpos +"," + firstLetterYPos + ")");
-            for (int characterCount = 1; characterCount < wordLength; characterCount++)
-            {
-                testword.Append(",(" + (firstLetterXpos - characterCount) +"," + (firstLetterYPos + characterCount) + ")");
-            }
-            return testword.ToString();
-        }
         
     }
 }
